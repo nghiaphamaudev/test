@@ -6,9 +6,9 @@
                         <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
                             <div class="collapse navbar-collapse" id="navbarNav">
                                 <ul class="navbar-nav d-flex justify-content-around w-100">
-                                <li class="nav-item">
-    <a class="nav-link  text-warning" href="../../../../Du_an_1/Controller/index_user.php?request=wait-confirm">Chờ Xác Nhận</a>
-</li>
+                                    <li class="nav-item">
+                                        <a class="nav-link  text-warning" href="../../../../Du_an_1/Controller/index_user.php?request=wait-confirm">Chờ Xác Nhận</a>
+                                    </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="../../../../Du_an_1/Controller/index_user.php?request=transport">Đang Giao</a>
                                     </li>
