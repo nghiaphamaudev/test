@@ -22,8 +22,8 @@
         pdo_query($sql);
     }
 
-    function Check_Exist_Product($id_product){
-        $sql ="SELECT * FROM `gio_hang` WHERE `id_sp` = '$id_product'";
+    function Check_Exist_Product($id_product,$id_user){
+        $sql ="SELECT * FROM `gio_hang` WHERE `id_sp` = '$id_product' AND `id_kh` = '$id_user'";
         return pdo_query_one($sql);
     }
 
@@ -47,6 +47,7 @@
         WHERE `id_kh` = '$id_user' AND `status` = 1;";
         return pdo_query($sql); 
     }
+
     function Check_Login(){
         if(isset($_SESSION['user'])){
             $list_data_checked= Load_Data_Checked($_SESSION['user']['id_kh']);

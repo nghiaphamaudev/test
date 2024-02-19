@@ -61,44 +61,82 @@
 
 <div class="product-info-tabs container">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item">
-            <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Mô tả</a>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active " id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Mô tả</button>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Nhận xét</a>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link " id="profile-tab" data-bs-toggle="tab" data-bs-target="#comment" type="button" role="tab" aria-controls="profile" aria-selected="false">Bình luận</button>
         </li>
+    
     </ul>
     <div class="tab-content" id="myTabContent">
 
-        <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab"><?= $chi_tiet ?></div>
-        <div class="row">
-        <h2 style="margin-bottom: 15px">Sản phẩm cùng hãng</h2>
-        <?php foreach ($list_same_category as $value) : extract($value); ?>
-            <div class="col-lg-3 col-md-6">
-                <div class="single-product">
-                    <div class="product-img">
-                        <img class="img-fluid w-100" src="../../../../Du_an_1/img/<?= $img ?>" alt="" />
-                        <div class="p_icon">
-                            <a href="../..//Controller/index_user.php?request=detail-product&id_product=<?= $id_sp ?>">
-                                <i class="ti-eye" title="Chi tiết sản phẩm"></i>
-                            </a>
-                            <a href="../../../Du_an_1/Controller/index_user.php?request=add-cart&id_product=<?=$id_sp?>&price=<?=$gia?>">
-                                <i class="ti-shopping-cart" title="Thêm vào giỏ hàng"></i>
-                            </a>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"><?=$chi_tiet?></div>
+            <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="contact-tab">
+                <div class="container mt-2">
+
+
+                    <div class="card mb-3 comment-container border-0 rounded">
+                        <div class="card-header row border-0">
+                            <h5 class="card-title col-10 text-primary">
+                                <i class="fa-solid fa-circle-user"></i> Phạm Văn Nghĩa
+                            </h5>
+                            <p class="card-subtitle text-muted col-2"> 01/02/2023</p>
+                            <div class="star row mt-1">
+                                <div class="col-3 ">
+                                  <i class="fas fa-star" style="color:gold"></i>
+                                  <i class="fas fa-star" style="color:gold"></i>
+                                  <i class="fas fa-star" style="color:gold"></i>
+                                  <i class="fas fa-star" style="color:gold"></i>
+                                  <i class="fas fa-star" style="color:gold"></i>
+                                </div>
+                                <div class="col-9"></div>
+                            </div>
+                            <div class=" border-0 mt-0">
+                            <p class="card-text" style="font-size:16px">Tired!!!</p>
                         </div>
+                        </div>
+                       
                     </div>
-                    <div class="product-btm">
-                        <a href="../../../Controller/index_user.php?request=detail-product&id_product=<?= $id_sp ?>" class="d-block">
-                            <h4><?= $ten_sp ?></h4>
-                        </a>
-                        <div class="mt-3">
-                            <span class="mr-4"><?php echo currency_format($gia, ' VND'); ?></span>
-                            <del>20.000.000 VND</del>
+
+                
+                    
+                    
+            
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div class="row">
+            <h2 style="margin-bottom: 15px">Sản phẩm cùng hãng</h2>
+            <?php foreach ($list_same_category as $value) : extract($value); ?>
+                <div class="col-lg-3 col-md-6">
+                    <div class="single-product">
+                        <div class="product-img">
+                            <img class="img-fluid w-100" src="../../../../Du_an_1/img/<?= $img ?>" alt="" />
+                            <div class="p_icon">
+                                <a href="../../../Du_an_1/Controller/index_user.php?request=detail-product&id_product=<?= $id_sp ?>">
+                                    <i class="ti-eye" title="Chi tiết sản phẩm"></i>
+                                </a>
+                                <a href="../../../Du_an_1/Controller/index_user.php?request=add-cart&id_product=<?=$id_sp?>&price=<?=$gia?>">
+                                    <i class="ti-shopping-cart" title="Thêm vào giỏ hàng"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-btm">
+                            <a href="../../../Du_an_1/Controller/index_user.php?request=detail-product&id_product=<?= $id_sp ?>" class="d-block">
+                                <h4><?= $ten_sp ?></h4>
+                            </a>
+                            <div class="mt-3">
+                                <span class="mr-4"><?php echo currency_format($gia, ' VND'); ?></span>
+                                <del>20.000.000 VND</del>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        <?php endforeach ?>
-    </div>
+            <?php endforeach ?>
+        </div>
     
 </div>

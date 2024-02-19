@@ -126,6 +126,16 @@ li.title {
     .navbar-custom .nav-link.clicked::before {
         transform: scaleX(1);
     }
+
+    .comment-container {
+            max-width: 700px;
+            margin-left: 0;
+            margin-right: auto;
+        }
+        .gold-star {
+            color: gold;
+            font-size: 24px;
+        }
         
 
 </style>
@@ -145,14 +155,19 @@ li.title {
                     <div class="col-lg-7">
                         <div class="float-right">
                             <div class="right_side">
-                            <?php if(isset($_SESSION['user']) && $_SESSION['user']['id_vaitro'] === 1){
+                            <?php if(isset($_SESSION['user'])){
+                                if($_SESSION['user']['id_vaitro'] === 1){
+                                     echo '
+                                        <li><a href="../../../Du_an_1/Controller/index_admin.php">Quản trị</a></li>   
+                                        ';
+                                }
                                 echo '
-                                <li><a href="../../../Du_an_1/Controller/index_admin.php">Quản trị</a></li>   
-                                ';
+                                       <li><a href="../../../Du_an_1/Controller/index_user.php?request=history-bill">Đơn mua</a></li>
+                                       <li><a href="../../../Du_an_1/Controller/index_user.php?request=log-out">Đăng xuất</a></li>';
+                               
                             } ?>
                                     
-                                    <li><a href="../../../Du_an_1/Controller/index_user.php?request=history-bill">Đơn mua</a></li>
-                                    <li><a href="../../../Du_an_1/Controller/index_user.php?request=log-out">Đăng xuất</a></li>
+                                    
                                 
                             </div>
                         </div>

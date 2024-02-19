@@ -22,14 +22,14 @@
                 if(isset($_POST['btn-register']) && $_POST['btn-register']){
                     $regrex = '/^(?=.*[!@#$%^&*()-_=+{}\[\]:;<>,.?\/`])[\w!@#$%^&*()-_=+{}\[\]:;<>,.?\/`]{6,}$/';
                     $pattern_email = '/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
-                    $pattern_phone = '/^0[0-9]{10}$/';
+                    $pattern_phone = '/^0[0-9]{9}$/';
 
                     $user_name = $_POST['user_name'];
                     $phone_number = $_POST['phone'];
                     $email = $_POST['email'];
                     $pass1 = $_POST['pass1'];
                     $pass2 = $_POST['pass2'];
-                    $account_exist = Check_Account_Exist($phone_number);
+                    $account_exist = Check_Account_Exist($phone_number,$email);
                     if (!is_array($account_exist)) {
                         if ($pass1 === $pass2) {
                             if (preg_match($regrex, $pass2) === 1 && preg_match($pattern_email, $email) === 1 && preg_match($pattern_phone, $phone_number) === 1) {
@@ -37,18 +37,18 @@
                                 echo '<script>alert("Tạo tài khoản thành công!");window.location="../../../../Du_an_1/View/User/login.php";</script>';
                             } else {
                                 if (preg_match($regrex, $pass2) === 0) {
-                                    echo '<script>alert("Mật khẩu ít nhất 6 kí tự, bao gồm kí tự đặc biệt!")</script>';
+                                    echo '<script>alert("Mật khẩu ít nhất 6 kí tự, bao gồm kí tự đặc biệt!");window.location="../../../../Du_an_1/View/User/register.php";</script>';
                                 } else if (preg_match($pattern_email, $email) === 0) {
-                                    echo '<script>alert("Email chưa đúng định dạng!");</script>';
+                                    echo '<script>alert("Email chưa đúng định dạng!");window.location="../../../../Du_an_1/View/User/register.php";</script>';
                                 } else if (preg_match($pattern_phone, $phone_number) === 0) {
-                                    echo '<script>alert("Số điện thoại chưa đúng định dạng!");</script>';
+                                    echo '<script>alert("Số điện thoại chưa đúng định dạng!");window.location="../../../../Du_an_1/View/User/register.php";</script>';
                                 }
                             }
                         } else {
-                            echo '<script>alert("Mật khẩu không trùng khớp!");</script>';
+                            echo '<script>alert("Mật khẩu không trùng khớp!");window.location="../../../../Du_an_1/View/User/register.php";</script>';
                         } 
                     } else {
-                        echo '<script>alert("Tài khoản đã tồn tại!");</script>';
+                        echo '<script>alert("Tài khoản đã tồn tại!");window.location="../../../../Du_an_1/View/User/register.php";</script>';
                     }
                     
                 }
@@ -146,7 +146,7 @@
                         $id_product = $_GET['id_product'];
                         $id_user = $_SESSION['user']['id_kh'];
                         $price = $_GET['price'];
-                        $check_exist_product = Check_Exist_Product($id_product);
+                        $check_exist_product = Check_Exist_Product($id_product,$id_user);
                         if(!empty($check_exist_product)){
                             $quantity = Quantity_Product($id_product)['so_luong'];
                             $quantity++;
@@ -156,9 +156,10 @@
                         }  
                     } else if(isset($_POST['add_to_cart']) && $_POST['add_to_cart']) {
                             $id_product = $_POST['id_product'];
+                            $id_user = $_SESSION['user']['id_kh'];
                             $quantity = $_POST['quantity'];
                             $price = $_POST['price'];
-                            $check_exist_product = Check_Exist_Product($id_product);
+                            $check_exist_product = Check_Exist_Product($id_product,$id_user);
                             if(!empty($check_exist_product)){
                                 $quantity = Quantity_Product($id_product)['so_luong'];
                                 $quantity++;
@@ -368,7 +369,7 @@
             case 'home':
                 include '../View/User/content.php';
                 break;    
-                
+           
 
 
 

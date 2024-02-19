@@ -10,6 +10,7 @@
     include '../Model/action_user.php';
     include '../View/Admin/sweetalert.php';
     include '../Model/action_cart.php';
+    include_once '../Model/action_bill.php';
 
     $list_data_categories = Load_All_Data_Categories();
     $list_data_product = Load_All_Data_Products();
@@ -198,7 +199,33 @@
                 $list_one_data_user =  Load_One_Data_User($id_user);
                 include '../View/Admin/user/update_user.php';
                 break;
-            
+
+            case 'manage-bill':
+                $list_wait_confirm = Wait_Confirm();
+                include '../View/Admin/donhang/manage_bill.php';
+                break;
+
+            case 'edit-bill':
+                if(isset($_GET['id_bill']) && $_GET['id_bill']){
+                    $list_data_bill_current = Load_Bill_Current($_GET['id_bill']);
+                    extract($list_data_bill_current);
+                    include '../View/Admin/donhang/update_bill.php';
+
+                }
+
+            case 'update-bill':
+                if(isset($_POST['btn_update']) && $_POST['btn_update']){
+                    $id_bill = $_POST['id_bill'];
+                    $status = $_POST['status'];
+                    $status = (int)$status;
+                    Update_Status_Bill($id_bill, $status);
+                    $_SESSION['success_message'] = 'Cập nhật thành công!!';
+                    header('Location: ../../../../Du_an_1/Controller/index_admin.php?request=manage-bill');
+                }
+                break;
+
+
+
 
 
         }

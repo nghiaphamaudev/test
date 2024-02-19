@@ -5,10 +5,9 @@
         </div>
         <div class="card bg-light text-dark mb-4 mt-3">
             <div class="card-body">
-                <p>Mã hóa đơn:
-                </p>
+                <p>Mã hóa đơn: <?=$id_hoa_don?></p>
                 <p>Người đặt: <span class="fw-bold">
-                       
+                       <?=$ho_ten?>
                     </span></p>
                 <p>Email:</p>
                 <p>Địa chỉ nhận hàng: 
