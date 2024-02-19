@@ -31,7 +31,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="../../../Du_an_1/Controller/index_admin.php?request=manage-comment">
                     <i class='bx bxs-message-dots'></i>
                     <span class="text">Quản Lý Bình Luận</span>
                 </a>

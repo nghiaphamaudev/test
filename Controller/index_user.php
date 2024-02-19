@@ -9,6 +9,7 @@
     include_once '../Model/action_cart.php';
     include_once '../Model/action_address.php';
     include_once '../Model/action_bill.php';
+    include_once '../Model/action_comment.php';
 
     $list_brand = Load_All_Data_Categories();
     $list_three_data_product = Load_Recommned_Product();
@@ -102,6 +103,7 @@
                     if (is_array( $list_one_data_product)) {
                         extract( $list_one_data_product);
                     }
+                    $list_comment =  Load_Comment($id_sp);
                     $list_same_category = Load_Product_Same_Category($id_dm);
 
                 }
@@ -364,6 +366,32 @@
                 $list_cancel_bill = Load_Cancel_Bill($_SESSION['user']['id_kh']);
                 include '../View/User/hoadon/dahuy.php';
                 break;
+            
+            case 'add-comment':
+                if(isset($_POST['comment-btn']) && $_POST['comment-btn']){
+                    $comment = $_POST['comment'];
+                    $id_kh = $_SESSION['user']['id_kh'];
+                    $id_product = $_POST['id_product'];
+                    Add_Comment($id_kh,$id_product,$comment);
+                }
+                header('Location: ../../../../Du_an_1/Controller/index_user.php?request=detail-product&id_product='.$id_product.'');
+                break;
+            case 'detail_comment':
+                if(isset($_GET['id_product']) && $_GET['id_product']){
+                    $id_product = $_GET['id_product'];
+                    $list_detail_comment = Detail_Comment($id_product);
+                }
+                include '../View/Admin/binhluan/detail.php';
+                break;
+                
+            case 'delete-comment':
+                if(isset($_GET['id_bl']) && $_GET['id_bl']){
+                    Delete_Comment($_GET['id_bl']);
+                    $_SESSION['success_message'] = 'Xóa thành công!!';
+                }
+                header('Location: ../../../../Du_an_1/Controller/index_admin.php?request=detail_comment');
+                break;
+                
             
             //Trang chủ
             case 'home':

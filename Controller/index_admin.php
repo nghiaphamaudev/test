@@ -11,6 +11,7 @@
     include '../View/Admin/sweetalert.php';
     include '../Model/action_cart.php';
     include_once '../Model/action_bill.php';
+    include_once '../Model/action_comment.php';
 
     $list_data_categories = Load_All_Data_Categories();
     $list_data_product = Load_All_Data_Products();
@@ -223,6 +224,30 @@
                     header('Location: ../../../../Du_an_1/Controller/index_admin.php?request=manage-bill');
                 }
                 break;
+
+                case 'manage-comment':
+                    $list_data_manage_comment = Manage_Comment();
+                    include '../View/Admin/binhluan/list.php';
+                    break;
+
+                case 'detail_comment':
+                    if(isset($_GET['id_product']) && $_GET['id_product']){
+                        $id_product = $_GET['id_product'];
+                        $ten_sp = Name_Product ($id_product)['ten_sp'];
+                        $list_detail_comment = Detail_Comment($id_product);
+                    }
+                    include '../View/Admin/binhluan/detail.php';
+                    break;
+    
+                case 'delete-comment':
+                    if(isset($_GET['id_bl']) && $_GET['id_bl']){
+                        Delete_Comment($_GET['id_bl']);
+                        $_SESSION['success_message'] = 'Xóa thành công!!';
+                          echo '<script>window.history.back();</script>';
+                        exit();
+                    }
+                  
+                    break;
 
 
 

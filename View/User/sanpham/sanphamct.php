@@ -45,7 +45,7 @@
                     <form action="../../../Du_an_1/Controller/index_user.php?request=add-cart" method="POST">
                         <div class="product_count">
                             <label for="qty">Quantity:</label>
-                            <input type="number" name="quantity" id="sst" max="3" value="1" min="1" title="Quantity:" class="input-text qty" />
+                            <input type="number" name="quantity" id="sst"  value="1" min="1" title="Quantity:" class="input-text qty" />
                         </div>
                         <div class="card_area">
                             <input type="hidden" value="<?= $id_sp ?>" name="id_product">
@@ -72,18 +72,22 @@
     <div class="tab-content" id="myTabContent">
 
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"><?=$chi_tiet?></div>
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"><?=$chi_tiet?>
+            </div>
             <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="contact-tab">
-                <div class="container mt-2">
 
 
+            <?php if(!empty($list_comment)){
+                        foreach($list_comment as $value){
+                            extract($value);
+                     ?>
                     <div class="card mb-3 comment-container border-0 rounded">
-                        <div class="card-header row border-0">
-                            <h5 class="card-title col-10 text-primary">
-                                <i class="fa-solid fa-circle-user"></i> Phạm Văn Nghĩa
-                            </h5>
-                            <p class="card-subtitle text-muted col-2"> 01/02/2023</p>
-                            <div class="star row mt-1">
+                    <div class="card-header row border-0">
+                            <div class="card-title col-9 text-primary mb-1">
+                                <i class="fa-solid fa-circle-user mr-1"></i><?=$ho_ten?>
+                            </div>
+                            <div class="card-subtitle text-muted col-3"><?=$ngay_tao?></div>
+                            <div class="star row mt-0 mb-1">
                                 <div class="col-3 ">
                                   <i class="fas fa-star" style="color:gold"></i>
                                   <i class="fas fa-star" style="color:gold"></i>
@@ -94,17 +98,35 @@
                                 <div class="col-9"></div>
                             </div>
                             <div class=" border-0 mt-0">
-                            <p class="card-text" style="font-size:16px">Tired!!!</p>
+                            <p class="card-text" style="font-size:16px"><?=$noi_dung?></p>
                         </div>
                         </div>
-                       
                     </div>
-
+                    <?php } }  ?>    
+                 
+                    <form action="../../../../Du_an_1/Controller/index_user.php?request=add-comment" method="post" class="mt-3">
+                        <div class="mb-4">
+                             <span >Đánh giá</span>
+                             <div class="star row mt-0 mb-3">
+                                <div class="col-3 ">
+                                  <i class="fas fa-star" style="color:gold"></i>
+                                  <i class="fas fa-star" style="color:gold"></i>
+                                  <i class="fas fa-star" style="color:gold"></i>
+                                  <i class="fas fa-star" style="color:gold"></i>
+                                  <i class="fas fa-star" style="color:gold"></i>
+                             </div>
+                        </div>
+                    
+                        <div class="form-group">
+                            <input type="hidden" name="id_product" value="<?=$id_sp?>">
+                            <input type="text" name="comment" class="form-control py-5" id="comment" required>
+                        </div>
+                        <input type="submit" name="comment-btn" style="width: auto; padding: 5px 10px;" class="btn btn-primary " value="Bình luận">
+                   </form>
                 
                     
                     
-            
-                </div>
+
             </div>
         </div>
     </div>
