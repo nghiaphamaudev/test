@@ -29,22 +29,22 @@
         return pdo_query($sql);
     }
     function Top_5_User(){
-        $sql ="SELECT khach_hang.ho_ten, khach_hang.sdt, COUNT(hoa_don.id_hoa_don) AS so_lan_mua, SUM(hoa_don.tong_gia) AS tong_gia_tri FROM hoa_don JOIN khach_hang ON hoa_don.id_kh = khach_hang.id_kh GROUP BY hoa_don.id_kh ORDER BY tong_gia_tri DESC LIMIT 5";
+        $sql ="SELECT khach_hang.ho_ten, khach_hang.sdt, COUNT(hoa_don.id_hoa_don) AS so_lan_mua, SUM(hoa_don.tong_gia) AS tong_gia_tri FROM hoa_don JOIN khach_hang ON hoa_don.id_kh = khach_hang.id_kh WHERE `trang_thai` = 2 GROUP BY hoa_don.id_kh ORDER BY tong_gia_tri DESC LIMIT 5";
         return pdo_query($sql);
     }
 
     function Doanh_Thu_Theo_Ngay(){
-        $sql ="SELECT ngay_tao, SUM(tong_gia) AS doanh_thu FROM hoa_don GROUP BY ngay_tao;";
+        $sql ="SELECT ngay_tao, SUM(tong_gia) AS doanh_thu FROM hoa_don WHERE `trang_thai` = 2 GROUP BY ngay_tao;";
         return pdo_query($sql);
     }
 
     function Doanh_Thu_Theo_Tuan(){
-        $sql ="SELECT CONCAT('Tuần ',WEEK(ngay_tao)) AS tuan, SUM(tong_gia) AS doanh_thu FROM hoa_don WHERE YEAR(ngay_tao) = YEAR(CURDATE()) GROUP BY tuan";
+        $sql ="SELECT CONCAT('Tuần ',WEEK(ngay_tao)) AS tuan, SUM(tong_gia) AS doanh_thu FROM hoa_don WHERE YEAR(ngay_tao) = YEAR(CURDATE()) AND `trang_thai` = 2  GROUP BY tuan";
         return pdo_query($sql);
     }
 
     function Doanh_Thu_Theo_Thang(){
-        $sql ="SELECT CONCAT('Tháng ', MONTH(ngay_tao)) AS thang, SUM(tong_gia) AS doanh_thu FROM hoa_don WHERE YEAR(ngay_tao) = YEAR(CURDATE()) GROUP BY thang;";
+        $sql ="SELECT CONCAT('Tháng ', MONTH(ngay_tao)) AS thang, SUM(tong_gia) AS doanh_thu FROM hoa_don WHERE YEAR(ngay_tao) = YEAR(CURDATE()) AND `trang_thai` = 2 GROUP BY thang;";
         return pdo_query($sql);
     }
 
@@ -54,7 +54,7 @@
     }
 
     function Top_3_San_Pham_Ban_Chay(){
-        $sql ="SELECT hdct.ten_sp, SUM(hdct.quantity) AS quantity, SUM(hdct.quantity * hdct.gia) AS tong_gia FROM hoa_don_chi_tiet hdct GROUP BY hdct.ten_sp ORDER BY tong_gia DESC LIMIT 3";
+        $sql ="SELECT hdct.ten_sp, SUM(hdct.quantity) AS quantity, SUM(hdct.quantity * hdct.gia) AS tong_gia FROM hoa_don_chi_tiet hdct JOIN hoa_don hd ON hd.id_hoa_don = hdct.id_hoa_don WHERE `trang_thai` = 2 GROUP BY hdct.ten_sp ORDER BY tong_gia DESC LIMIT 3";
         return pdo_query($sql);
     }
 
