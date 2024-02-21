@@ -37,7 +37,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="../../../Du_an_1/Controller/index_admin.php?request=chart">
                     <i class='bx bxs-doughnut-chart'></i>
                     <span class="text">Thống Kê</span>
                 </a>
